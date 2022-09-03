@@ -11,36 +11,29 @@ class ExactUserRequest {
 }
 
 async function getGjally() {
-  var headers = new Headers();
-  headers.append("X-API-Key", key.key);
-
-  let f = new FormData();
-
-  f.append("displayName", "Disgust.jpg");
-  f.append("displayNameCode", "8035");
-
-  let r = new Request(
-    "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1",
-    {
-      headers: headers,
-      method: "POST",
-      body: JSON.stringify({
-        displayName: "Disgust.jpg",
-        displayNameCode: 8035,
-      }),
-      redirect: "follow",
-    }
-  );
-
-  const respo = await fetch(r).then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP Error!: Status: ${response.status}`);
-    }
-
-    console.log(JSON.stringify(response.json()));
+  var header = new Headers({
+    "X-API-Key": key.key,
   });
 
-  console.log(JSON.stringify(respo));
+  const disgust = new ExactUserRequest("Disgust.jpg", 8035);
+  var membershipId;
+
+  const swag = await fetch(
+    "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/",
+    {
+      method: "POST",
+      headers: header,
+      redirect: "follow",
+      body: JSON.stringify(disgust),
+    }
+  ).then((response) => {
+    return response.json();
+  });
+
+  membershipId = swag.Response[0].membershipId;
+
+  console.log(swag.Response);
+  console.log(membershipId);
 }
 
 const Body = () => (
