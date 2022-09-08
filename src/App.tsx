@@ -1,7 +1,6 @@
 import "./index.css";
 import React from "react";
 import Key from "./key.json";
-
 class App extends React.Component {
   constructor(props: any) {
     super(props);
