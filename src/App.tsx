@@ -52,7 +52,7 @@ class App extends React.Component {
       if (response.ok) {
         return response.json();
       } else {
-        return "There was an error, most likely 400 server error. Jens did a retard moment.";
+        return "Error";
       }
     });
 
